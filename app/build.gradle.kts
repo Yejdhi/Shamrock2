@@ -149,7 +149,7 @@ fun configureAppSigningConfigsForRelease(project: Project) {
         }
         buildTypes {
             release {
-                signingConfig = signingConfigs.findByName("release")
+                
             }
         }
     }
