@@ -69,19 +69,19 @@ jobs:
           echo "|x86_64|$x86_64" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload ALL APK RELEASE
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Shamrock-v${{ env.SHAMROCK_VERSION }}-all
           path: ${{ env.APK_FILE_ALL }}
 
       - name: Upload ARM64 APK RELEASE
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Shamrock-v${{ env.SHAMROCK_VERSION }}-arm64
           path: ${{ env.APK_FILE_ARM64 }}
 
       - name: Upload X86_64 APK RELEASE
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Shamrock-v${{ env.SHAMROCK_VERSION }}-x86_64
           path: ${{ env.APK_FILE_X86_64 }}
