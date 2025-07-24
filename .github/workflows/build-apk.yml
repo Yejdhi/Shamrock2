@@ -32,7 +32,7 @@ jobs:
         run: |
           echo ${{ secrets.SIGN_KEYSTORE_BASE64 }} | base64 -d > keystore.jks
           chmod +x ./gradlew
-          ./gradlew :app:assembleDebug --build-cache --parallel --daemon --warning-mode all --stacktrace
+          ./gradlew :app:assembleRelease --build-cache --parallel --daemon --warning-mode all --stacktrace
           echo "APK_FILE_ALL=$(find app/build/outputs/apk/app/release -name '*.apk')" >> $GITHUB_ENV
           echo "APK_FILE_ARM64=$(find app/build/outputs/apk/arm64/release -name '*.apk')" >> $GITHUB_ENV
           echo "APK_FILE_X86_64=$(find app/build/outputs/apk/x64/release -name '*.apk')" >> $GITHUB_ENV
@@ -44,13 +44,6 @@ jobs:
 
       - name: Install aapt
         run: sudo apt-get update && sudo apt-get install -y aapt
-
-      - name: Set Shamrock Version
-        run: |
-          apk_file=${{ env.APK_FILE_ALL }}
-          apk_dump=$(aapt dump badging "$apk_file")
-          version_name=$(sed -n "s/.*versionName='\([^']*\)'.*/\1/p" <<< "$apk_dump")
-          echo "SHAMROCK_VERSION=$version_name" >> $GITHUB_ENV
 
       - name: Show Artifacts SHA256
         run: |
